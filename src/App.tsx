@@ -4,6 +4,7 @@ import store from './redux/store';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SideBar from './components/sidebar/Sidebar';
 import Container from './components/container/Container';
+import Fallback from './components/fallback/Fallback';
 
 const Home = lazy(() => import('./components/home/Home'));
 const Vehicles = lazy(() => import('./components/vehicles/Vehicles'));
@@ -11,40 +12,6 @@ const Locations = lazy(() => import('./components/locations/Locations'));
 const Drivers = lazy(() => import('./components/drivers/Drivers'));
 const Messages = lazy(() => import('./components/messages/Messages'));
 const Dashboard = lazy(() => import('./components/dashboard/Dashboard'));
-
-// import { getVehiclesRequest } from './redux/vehicles/requests';
-// import { getVehicleTypesRequest } from './redux/vehicle-types/requests';
-// import { useDispatch } from 'react-redux';
-
-const App = () => {
-  // const dispatch = useDispatch();
-  // React.useEffect(() => {
-  //   dispatch(getVehicleTypesRequest());
-  // }, [dispatch]);
-
-  return (
-    <Provider store={store}>
-      <div className='app'>
-        <Router>
-          <SideBar />
-          <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              <Route exact path='/' component={HomeComponent} />
-              <Route path='/vehicles' component={VehiclesComponent} />
-              <Route path='/locations' component={LocationsComponent} />
-              <Route path='/drivers' component={DriversComponent} />
-              <Route path='/messages' component={MessagesComponent} />
-              <Route path='/dashboard' component={DashboardComponent} />
-              <Route component={PageNotFound} />
-            </Switch>
-          </Suspense>
-        </Router>
-      </div>
-    </Provider>
-  );
-};
-
-export default App;
 
 const HomeComponent = () => (
   <Container title='Welcome'>
@@ -77,5 +44,40 @@ const DashboardComponent = () => (
   </Container>
 );
 const PageNotFound = () => (
-  <Container title='Page Not Found'>Click here to go home.</Container>
+  <Container title='Page Not Found'>
+    Please click an item on the sidebar
+  </Container>
 );
+
+const routes = [
+  { path: '/', Component: HomeComponent },
+  { path: '/vehicles', Component: VehiclesComponent },
+  { path: '/locations', Component: LocationsComponent },
+  { path: '/drivers', Component: DriversComponent },
+  { path: '/messages', Component: MessagesComponent },
+  { path: '/dashboard', Component: DashboardComponent },
+];
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <div className='app'>
+        <Router>
+          <SideBar />
+          <Suspense fallback={<Fallback />}>
+            <Switch>
+              {routes.map(({ path, Component }) => (
+                <Route key={path} exact path={path}>
+                  <Component />
+                </Route>
+              ))}
+              <Route component={PageNotFound} />
+            </Switch>
+          </Suspense>
+        </Router>
+      </div>
+    </Provider>
+  );
+};
+
+export default App;
