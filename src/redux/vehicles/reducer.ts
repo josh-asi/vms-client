@@ -16,7 +16,8 @@ export default (
   switch (action.type) {
     case 'GET_VEHICLES':
       return { ...state, data: action.payload };
-
+    case 'ADD_VEHICLE':
+      return { ...state, data: [...state.data, action.payload] };
     default:
       return state;
   }

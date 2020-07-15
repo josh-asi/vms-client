@@ -4,3 +4,9 @@ export interface Vehicle {
   speed: number;
   mileage: number;
 }
+
+export interface NewVehicleRequest {
+  type: number;
+  speed: number;
+  mileage: number;
+}
