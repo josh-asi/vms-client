@@ -7,4 +7,64 @@
   background-color: $color-secondary;
   box-shadow: 15px 0px 16px #0a3d5140;
   color: white;
+  padding: 2rem;
+  margin-bottom: 6rem;
+  font-size: 2rem;
+
+  &__title {
+    text-decoration: none;
+    color: white;
+  }
+
+  &__navigation {
+    margin-top: 5rem;
+    margin-bottom: auto;
+  }
+
+  &__icon {
+    margin-right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  &__nav-item {
+    display: flex;
+    align-items: center;
+
+    padding: 0.4rem 0;
+    margin-bottom: 1.5rem;
+
+    position: relative;
+
+    a {
+      text-decoration: none;
+      color: white;
+      width: 100%;
+
+      &.current-link {
+        font-weight: 600;
+
+        &::before {
+          content: '';
+          height: 2.6rem;
+          width: 0.4rem;
+          position: absolute;
+          top: 0;
+          left: 0;
+          transform: translateX(-2rem);
+          background-color: white;
+        }
+
+        &--system {
+          &::before {
+            transform: translateX(-3rem);
+          }
+        }
+      }
+    }
+
+    &:hover {
+      background-color: #ffffff1a;
+    }
+  }
 }

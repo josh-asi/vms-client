@@ -16,8 +16,8 @@ const App = () => {
   return (
     <Provider store={store}>
       <div className='app'>
-        <SideBar />
         <Router>
+          <SideBar />
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
               <Route exact path='/' component={Home} />
