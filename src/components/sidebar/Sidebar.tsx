@@ -36,7 +36,7 @@ const Sidebar = () => {
             className='sidebar__icon'
           />
           <NavLink activeClassName='current-link' to='/locations'>
-            Location
+            Locations
           </NavLink>
         </div>
         <div className='sidebar__nav-item sidebar__nav-item--drivers'>

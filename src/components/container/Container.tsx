@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import './_container.scss';
 
 interface ContainerProps {
   title: string;

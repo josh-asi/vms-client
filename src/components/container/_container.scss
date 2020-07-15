@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+
+.container {
+  padding: 3rem;
+
+  &__title {
+    color: $color-primary;
+    font-weight: 300;
+  }
+}

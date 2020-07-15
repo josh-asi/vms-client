@@ -1,8 +1,17 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SideBar from './components/sidebar/Sidebar';
+import Container from './components/container/Container';
+
+const Home = lazy(() => import('./components/home/Home'));
+const Vehicles = lazy(() => import('./components/vehicles/Vehicles'));
+const Locations = lazy(() => import('./components/locations/Locations'));
+const Drivers = lazy(() => import('./components/drivers/Drivers'));
+const Messages = lazy(() => import('./components/messages/Messages'));
+const Dashboard = lazy(() => import('./components/dashboard/Dashboard'));
+
 // import { getVehiclesRequest } from './redux/vehicles/requests';
 // import { getVehicleTypesRequest } from './redux/vehicle-types/requests';
 // import { useDispatch } from 'react-redux';
@@ -20,12 +29,12 @@ const App = () => {
           <SideBar />
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
-              <Route exact path='/' component={Home} />
-              <Route path='/vehicles' component={Vehicles} />
-              <Route path='/locations' component={Locations} />
-              <Route path='/drivers' component={Drivers} />
-              <Route path='/messages' component={Messages} />
-              <Route path='/dashboard' component={Dashboard} />
+              <Route exact path='/' component={HomeComponent} />
+              <Route path='/vehicles' component={VehiclesComponent} />
+              <Route path='/locations' component={LocationsComponent} />
+              <Route path='/drivers' component={DriversComponent} />
+              <Route path='/messages' component={MessagesComponent} />
+              <Route path='/dashboard' component={DashboardComponent} />
               <Route component={PageNotFound} />
             </Switch>
           </Suspense>
@@ -37,10 +46,36 @@ const App = () => {
 
 export default App;
 
-const Home = () => <div>Home</div>;
-const Vehicles = () => <div>Vehicles</div>;
-const Locations = () => <div>Locations</div>;
-const Drivers = () => <div>Drivers</div>;
-const Messages = () => <div>Messages</div>;
-const Dashboard = () => <div>Dashboard</div>;
-const PageNotFound = () => <div>Page not found. Click here to go home.</div>;
+const HomeComponent = () => (
+  <Container title='Welcome'>
+    <Home />
+  </Container>
+);
+const VehiclesComponent = () => (
+  <Container title='Vehicles'>
+    <Vehicles />
+  </Container>
+);
+const LocationsComponent = () => (
+  <Container title='Locations'>
+    <Locations />
+  </Container>
+);
+const DriversComponent = () => (
+  <Container title='Drivers'>
+    <Drivers />
+  </Container>
+);
+const MessagesComponent = () => (
+  <Container title='Messages'>
+    <Messages />
+  </Container>
+);
+const DashboardComponent = () => (
+  <Container title='Dashboard'>
+    <Dashboard />
+  </Container>
+);
+const PageNotFound = () => (
+  <Container title='Page Not Found'>Click here to go home.</Container>
+);
