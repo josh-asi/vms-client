@@ -1,15 +1,33 @@
 import moxios from 'moxios';
 
-import { getVehiclesRequest, addNewVehicleRequest } from './requests';
+import {
+  getVehiclesRequest,
+  addNewVehicleRequest,
+  updateMileageRequest,
+} from './requests';
 import { storeFactory } from '../../../test/testUtils';
 import { AppState } from '../store';
 import { vehicles } from './vehiclesInMemory';
-import { Vehicle, NewVehicleRequest } from './types';
+import {
+  Vehicle,
+  NewVehicleRequest,
+  UpdatedMileageRespose,
+  UpdateMileageRequest,
+} from './types';
 
 describe('Vehicle integration test', () => {
   let store = storeFactory();
 
-  beforeEach(() => moxios.install());
+  beforeEach(() => {
+    moxios.install();
+    const initialState: Partial<AppState> = {
+      vehicles: {
+        data: vehicles,
+      },
+    };
+
+    store = storeFactory(initialState);
+  });
   afterEach(() => moxios.uninstall());
 
   it('should grab all the vehicles', () => {
@@ -38,14 +56,6 @@ describe('Vehicle integration test', () => {
   });
 
   it('should add a new vehicle and add it to the bottom of the list', () => {
-    const initialState: Partial<AppState> = {
-      vehicles: {
-        data: vehicles,
-      },
-    };
-
-    store = storeFactory(initialState);
-
     const response: Vehicle = {
       id: 5,
       speed: 99.99,
@@ -71,6 +81,29 @@ describe('Vehicle integration test', () => {
 
     return store.dispatch(addNewVehicleRequest(request)).then(() => {
       const { data } = store.getState().vehicles;
+      expect(data).toEqual(expectedData);
+    });
+  });
+
+  it('should update the mileage for a vehicle based on the id', () => {
+    const id = 1;
+    const mileage = 999999.99;
+
+    const response: UpdatedMileageRespose = { id, mileage };
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        response,
+        status: 200,
+      });
+    });
+
+    const request: UpdateMileageRequest = { id, mileage };
+    const expectedData: Vehicle = { ...vehicles[0], mileage };
+
+    return store.dispatch(updateMileageRequest(request)).then(() => {
+      const data = store.getState().vehicles.data[0];
       expect(data).toEqual(expectedData);
     });
   });

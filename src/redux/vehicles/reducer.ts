@@ -14,10 +14,18 @@ export default (
   action: VehiclesAction
 ): VehiclesState => {
   switch (action.type) {
-    case 'GET_VEHICLES':
-      return { ...state, data: action.payload };
     case 'ADD_VEHICLE':
       return { ...state, data: [...state.data, action.payload] };
+    case 'GET_VEHICLES':
+      return { ...state, data: action.payload };
+    case 'UPDATE_MILEAGE':
+      const updatedMileage = state.data.map((vehicle) => {
+        if (vehicle.id === action.payload.id) {
+          vehicle = { ...vehicle, mileage: action.payload.mileage };
+        }
+        return vehicle;
+      });
+      return { ...state, data: updatedMileage };
     default:
       return state;
   }
