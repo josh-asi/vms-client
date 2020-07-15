@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+
+.sidebar {
+  height: 100%;
+  width: 27rem;
+  min-width: 27rem;
+  background-color: $color-secondary;
+  box-shadow: 15px 0px 16px #0a3d5140;
+  color: white;
+}
