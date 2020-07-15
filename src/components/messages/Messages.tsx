@@ -1,7 +1,6 @@
 import React from 'react';
+import WIP from '../wip/WIP';
 
-const Messages = () => {
-  return <div>Messages</div>;
-};
+const Messages = () => <WIP />;
 
 export default Messages;

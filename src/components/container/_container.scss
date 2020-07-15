@@ -3,8 +3,12 @@
 .container {
   padding: 3rem;
 
+  flex-basis: 85%;
+  width: 100%;
+
   &__title {
     color: $color-primary;
     font-weight: 300;
+    margin-bottom: 3rem;
   }
 }

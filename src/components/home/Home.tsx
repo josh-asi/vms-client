@@ -1,7 +1,8 @@
 import React from 'react';
+import WIP from '../wip/WIP';
 
 const Home = () => {
-  return <div>Home</div>;
+  return <WIP />;
 };
 
 export default Home;

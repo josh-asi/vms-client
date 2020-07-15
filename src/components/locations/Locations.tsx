@@ -1,7 +1,6 @@
 import React from 'react';
+import WIP from '../wip/WIP';
 
-const Locations = () => {
-  return <div>Locations</div>;
-};
+const Locations = () => <WIP />;
 
 export default Locations;

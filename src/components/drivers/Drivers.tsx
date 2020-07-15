@@ -1,7 +1,6 @@
 import React from 'react';
+import WIP from '../wip/WIP';
 
-const Drivers = () => {
-  return <div>Drivers</div>;
-};
+const Drivers = () => <WIP />;
 
 export default Drivers;

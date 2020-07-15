@@ -1,7 +1,6 @@
 import React from 'react';
+import WIP from '../wip/WIP';
 
-const Dashboard = () => {
-  return <div>Dashboard</div>;
-};
+const Dashboard = () => <WIP />;
 
 export default Dashboard;
