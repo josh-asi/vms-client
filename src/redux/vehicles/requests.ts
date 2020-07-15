@@ -1,21 +1,15 @@
 import axios from 'axios';
 import { server } from '../helpers';
 import { AnyAction, Dispatch } from 'redux';
-import { getVehicles, addVehicle, updateMileage } from './actions';
+import {
+  getVehicles,
+  addVehicle,
+  updateMileage,
+  deleteVehicle,
+} from './actions';
 import { NewVehicleRequest, UpdateMileageRequest } from './types';
 
 const endpoint = `${server}/api/vehicle`;
-
-export const getVehiclesRequest = () => async (
-  dispatch: Dispatch<AnyAction>
-) => {
-  try {
-    const { data } = await axios.get(`${server}/api/vehicles`);
-    return dispatch(getVehicles(data));
-  } catch (e) {
-    console.error(`Failed to retrieve vehicles : ${e}`);
-  }
-};
 
 export const addNewVehicleRequest = (request: NewVehicleRequest) => async (
   dispatch: Dispatch<AnyAction>
@@ -28,6 +22,17 @@ export const addNewVehicleRequest = (request: NewVehicleRequest) => async (
   }
 };
 
+export const getVehiclesRequest = () => async (
+  dispatch: Dispatch<AnyAction>
+) => {
+  try {
+    const { data } = await axios.get(`${server}/api/vehicles`);
+    return dispatch(getVehicles(data));
+  } catch (e) {
+    console.error(`Failed to retrieve vehicles : ${e}`);
+  }
+};
+
 export const updateMileageRequest = (request: UpdateMileageRequest) => async (
   dispatch: Dispatch<AnyAction>
 ) => {
@@ -36,5 +41,16 @@ export const updateMileageRequest = (request: UpdateMileageRequest) => async (
     return dispatch(updateMileage(data));
   } catch (e) {
     console.error(`Failed to update mileage : ${e}`);
+  }
+};
+
+export const deleteVehicleRequest = (vehicleId: number) => async (
+  dispatch: Dispatch<AnyAction>
+) => {
+  try {
+    const { data } = await axios.delete(`${endpoint}/${vehicleId}`);
+    return dispatch(deleteVehicle(data));
+  } catch (e) {
+    console.error(`Failed to delete vehicle : ${e}`);
   }
 };

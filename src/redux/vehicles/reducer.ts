@@ -26,6 +26,11 @@ export default (
         return vehicle;
       });
       return { ...state, data: updatedMileage };
+    case 'DELETE_VEHICLE':
+      return {
+        ...state,
+        data: state.data.filter((vehicle) => vehicle.id !== action.payload),
+      };
     default:
       return state;
   }
