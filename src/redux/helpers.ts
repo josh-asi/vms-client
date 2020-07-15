@@ -6,3 +6,5 @@ export function typedAction<T extends string, P extends any>(
 export function typedAction(type: string, payload?: any) {
   return { type, payload };
 }
+
+export const server = 'https://localhost:5001';
