@@ -61,7 +61,7 @@ const routes = [
 const App = () => {
   return (
     <Provider store={store}>
-      <div className='app'>
+      <main className='app'>
         <Router>
           <SideBar />
           <Suspense fallback={<Fallback />}>
@@ -75,7 +75,7 @@ const App = () => {
             </Switch>
           </Suspense>
         </Router>
-      </div>
+      </main>
     </Provider>
   );
 };

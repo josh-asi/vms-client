@@ -20,8 +20,8 @@ export default (
       return { ...state, data: action.payload };
     case 'UPDATE_MILEAGE':
       const updatedMileage = state.data.map((vehicle) => {
-        if (vehicle.id === action.payload.id) {
-          vehicle = { ...vehicle, mileage: action.payload.mileage };
+        if (vehicle.id === action.payload.vehicleId) {
+          vehicle = { ...vehicle, mileage: action.payload.newMileage };
         }
         return vehicle;
       });

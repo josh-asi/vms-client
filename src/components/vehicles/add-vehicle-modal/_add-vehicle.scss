@@ -1,0 +1,73 @@
+@import '../../../styles/mixins';
+
+.add-vehicle {
+  @include centerToRelative;
+  background-color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  width: 35rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    margin-right: auto;
+  }
+
+  &__body {
+    & > * {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__type {
+    & > :last-child {
+      flex: 1;
+      margin-left: 3rem;
+    }
+  }
+
+  &__speed {
+    form {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    label {
+      margin-right: 2rem;
+    }
+
+    input {
+      @include inputStyles;
+      flex: 1;
+    }
+  }
+
+  &__mileage {
+    form {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    label {
+      margin-right: 1rem;
+    }
+
+    input {
+      @include inputStyles;
+      flex: 1;
+    }
+  }
+
+  &__footer {
+    text-align: right;
+    margin-top: 2rem;
+  }
+}
