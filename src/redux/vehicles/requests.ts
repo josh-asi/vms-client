@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { server } from '../helpers';
 import { AnyAction, Dispatch } from 'redux';
+import { toast } from 'react-toastify';
 import {
   getVehicles,
   addVehicle,
@@ -18,7 +19,9 @@ export const addNewVehicleRequest = (request: NewVehicleRequest) => async (
     const { data } = await axios.post(endpoint, request);
     return dispatch(addVehicle(data));
   } catch (e) {
-    console.error(`Failed to add new vehicle : ${e}`);
+    const errorMessage = 'Failed to add new vehicle';
+    console.error(`${errorMessage} : ${e}`);
+    toast.error(errorMessage);
   }
 };
 
@@ -29,7 +32,9 @@ export const getVehiclesRequest = () => async (
     const { data } = await axios.get(`${server}/api/vehicles`);
     return dispatch(getVehicles(data));
   } catch (e) {
-    console.error(`Failed to retrieve vehicles : ${e}`);
+    const errorMessage = 'Failed to retrieve vehicles';
+    console.error(`${errorMessage} : ${e}`);
+    toast.error(errorMessage);
   }
 };
 
@@ -40,7 +45,9 @@ export const updateMileageRequest = (request: UpdateMileageRequest) => async (
     const { data } = await axios.patch(`${endpoint}/mileage`, request);
     return dispatch(updateMileage(data));
   } catch (e) {
-    console.error(`Failed to update mileage : ${e}`);
+    const errorMessage = 'Failed to update mileage';
+    console.error(`${errorMessage} : ${e}`);
+    toast.error(errorMessage);
   }
 };
 
@@ -51,6 +58,8 @@ export const deleteVehicleRequest = (vehicleId: number) => async (
     const { data } = await axios.delete(`${endpoint}/${vehicleId}`);
     return dispatch(deleteVehicle(data));
   } catch (e) {
-    console.error(`Failed to delete vehicle : ${e}`);
+    const errorMessage = 'Failed to delete vehicle';
+    console.error(`${errorMessage} : ${e}`);
+    toast.error(errorMessage);
   }
 };

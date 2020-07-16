@@ -2,9 +2,13 @@ import React, { Suspense, lazy } from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import SideBar from './components/sidebar/Sidebar';
 import Container from './components/container/Container';
 import Fallback from './components/fallback/Fallback';
+import 'react-toastify/dist/ReactToastify.min.css';
+import { server } from './redux/helpers';
 
 const Home = lazy(() => import('./components/home/Home'));
 const Vehicles = lazy(() => import('./components/vehicles/Vehicles'));
@@ -59,6 +63,15 @@ const routes = [
 ];
 
 const App = () => {
+  React.useEffect(() => {
+    const testConnection = async () => {
+      await axios
+        .get(`${server}/health`)
+        .catch(() => toast.error('No connection to the remote server'));
+    };
+    testConnection();
+  }, []);
+
   return (
     <Provider store={store}>
       <main className='app'>
@@ -75,6 +88,11 @@ const App = () => {
             </Switch>
           </Suspense>
         </Router>
+        <ToastContainer
+          position={'bottom-center'}
+          pauseOnFocusLoss={false}
+          limit={8}
+        />
       </main>
     </Provider>
   );
