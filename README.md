@@ -3,6 +3,7 @@
 - [VMS Client](#vms-client)
   - [Setup](#setup)
   - [Technologies Used](#technologies-used)
+  - [Server](#server)
 
 ## Setup
 
@@ -26,3 +27,9 @@
 
 - React
 - TypeScript
+- Redux
+- Sass
+
+## Server
+
+Please make sure that the API server is running before the client server is run. The Github repository can be located [here](https://github.com/josh-asi/vms-web-api).
