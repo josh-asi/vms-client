@@ -2,9 +2,11 @@ import React, { Suspense, lazy } from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import SideBar from './components/sidebar/Sidebar';
 import Container from './components/container/Container';
 import Fallback from './components/fallback/Fallback';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const Home = lazy(() => import('./components/home/Home'));
 const Vehicles = lazy(() => import('./components/vehicles/Vehicles'));
@@ -75,6 +77,11 @@ const App = () => {
             </Switch>
           </Suspense>
         </Router>
+        <ToastContainer
+          position={'bottom-center'}
+          pauseOnFocusLoss={false}
+          limit={8}
+        />
       </main>
     </Provider>
   );
