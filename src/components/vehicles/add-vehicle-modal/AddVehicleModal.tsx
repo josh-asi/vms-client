@@ -1,11 +1,13 @@
 import React from 'react';
+import Classnames from 'classnames';
 import Select, { ValueType } from 'react-select';
 import ModalWrapper from '../../modal-wrapper/ModalWrapper';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { VehicleType } from '../../../redux/vehicle-types/types';
 import { AppState } from '../../../redux/store';
 
 import './_add-vehicle.scss';
+import { addNewVehicleRequest } from '../../../redux/vehicles/requests';
 
 interface AddVehicleModalProps {
   closeAddVehicleModal: () => void;
@@ -19,6 +21,8 @@ interface Option {
 const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
   closeAddVehicleModal,
 }) => {
+  const dispatch = useDispatch();
+
   const [type, setType] = React.useState<number>(0);
   const [speed, setSpeed] = React.useState<number>(0.0);
   const [mileage, setMileage] = React.useState<number>(0.0);
@@ -42,6 +46,22 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
 
   const mileageInputOnChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setMileage(e.target.valueAsNumber);
+
+  const addVehicleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (isButtonDisabled) return;
+
+    dispatch(
+      addNewVehicleRequest({
+        type,
+        speed,
+        mileage,
+      })
+    );
+
+    closeAddVehicleModal();
+  };
+
+  const isButtonDisabled = type === 0;
 
   return (
     <ModalWrapper>
@@ -76,12 +96,12 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
           </div>
           <div className='add-vehicle__mileage'>
             <form>
-              <label htmlFor='speed'>Mileage :</label>
+              <label htmlFor='mileage'>Mileage :</label>
               <input
                 type='number'
                 step='0.1'
                 min='0'
-                id='speed'
+                id='mileage'
                 onChange={mileageInputOnChange}
                 value={mileage}
               />
@@ -89,7 +109,12 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
           </div>
         </div>
         <div className='add-vehicle__footer'>
-          <span className='add-btn'>Add</span>
+          <button
+            className={Classnames('add-btn', { disabled: isButtonDisabled })}
+            onClick={addVehicleOnClick}
+          >
+            Add
+          </button>
         </div>
       </div>
     </ModalWrapper>
