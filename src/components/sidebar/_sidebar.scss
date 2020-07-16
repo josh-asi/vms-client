@@ -1,0 +1,74 @@
+@import '../../styles/variables';
+
+.sidebar {
+  height: 100%;
+  width: 27rem;
+  min-width: 27rem;
+  background-color: $color-secondary;
+  box-shadow: 15px 0px 16px #0a3d5140;
+  color: white;
+  padding: 2rem;
+  margin-bottom: 6rem;
+  font-size: 2rem;
+
+  &__title {
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    display: block;
+    margin-top: 1.5rem;
+  }
+
+  &__navigation {
+    margin-top: 5rem;
+    margin-bottom: auto;
+  }
+
+  &__icon {
+    margin-right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  &__nav-item {
+    display: flex;
+    align-items: center;
+
+    padding: 0.4rem 0;
+    margin-bottom: 1.5rem;
+
+    position: relative;
+    font-weight: 300;
+
+    a {
+      text-decoration: none;
+      color: white;
+      width: 100%;
+
+      &.current-link {
+        font-weight: 600;
+
+        &::before {
+          content: '';
+          height: 3.4rem;
+          width: 0.4rem;
+          position: absolute;
+          top: 0;
+          left: 0;
+          transform: translateX(-2rem);
+          background-color: white;
+        }
+
+        &--system {
+          &::before {
+            transform: translateX(-3rem);
+          }
+        }
+      }
+    }
+
+    &:hover {
+      background-color: #ffffff1a;
+    }
+  }
+}

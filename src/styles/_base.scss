@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+@import './variables';
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 62.5%; // 1rem = 10px
+  overflow: hidden;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  font-size: 1.6rem;
+}
+
+.heading-primary {
+  font-size: 6rem;
+}
+
+.heading-secondary {
+  font-size: 4rem;
+}
+
+.heading-tertiary {
+  font-size: 2rem;
+}
+
+.btn {
+  border: 2px solid $color-primary;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: white;
+
+  transition: all 0.2s ease;
+
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: white;
+  }
+}
+
+.add-btn {
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  width: 5rem;
+}
+
+.update-btn {
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  width: 8rem;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  background-color: #cccccc;
+  border: 2px solid #cccccc;
+}

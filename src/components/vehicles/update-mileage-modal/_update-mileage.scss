@@ -1,0 +1,40 @@
+@import '../../../styles/mixins';
+
+.update-mileage {
+  @include centerToRelative;
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  width: 30rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    margin-right: auto;
+  }
+
+  &__mileage {
+    form {
+      display: flex;
+      align-items: center;
+    }
+
+    label {
+      margin-right: 1rem;
+    }
+
+    input {
+      @include inputStyles;
+      flex: 1;
+    }
+  }
+
+  &__footer {
+    text-align: right;
+    margin-top: 2rem;
+  }
+}

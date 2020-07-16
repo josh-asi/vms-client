@@ -1,0 +1,33 @@
+@mixin hideScrollBar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@mixin centerToRelative {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin inputStyles {
+  transition: all 0.2s;
+  outline: 0;
+  padding: 2px 8px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  min-height: 38px;
+
+  &:hover {
+    border-color: #b3b3b3;
+  }
+
+  &:focus {
+    border: 1px solid #2684ff;
+    box-shadow: 0 0 0 1px #2684ff;
+  }
+}
