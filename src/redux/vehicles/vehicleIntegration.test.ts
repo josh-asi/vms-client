@@ -87,10 +87,13 @@ describe('Vehicle integration test', () => {
   });
 
   it('should update the mileage for a vehicle based on the id', () => {
-    const id = 1;
-    const mileage = 999999.99;
+    const vehicleId = 1;
+    const newMileage = 999999.99;
 
-    const response: UpdatedMileageRespose = { id, mileage };
+    const response: UpdatedMileageRespose = {
+      vehicleId,
+      newMileage,
+    };
 
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
@@ -100,8 +103,11 @@ describe('Vehicle integration test', () => {
       });
     });
 
-    const request: UpdateMileageRequest = { id, mileage };
-    const expectedData: Vehicle = { ...vehicles[0], mileage };
+    const request: UpdateMileageRequest = {
+      vehicleId,
+      newMileage,
+    };
+    const expectedData: Vehicle = { ...vehicles[0], mileage: newMileage };
 
     return store.dispatch(updateMileageRequest(request)).then(() => {
       const data = store.getState().vehicles.data[0];

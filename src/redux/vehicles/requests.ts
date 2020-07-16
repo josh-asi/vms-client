@@ -37,7 +37,7 @@ export const updateMileageRequest = (request: UpdateMileageRequest) => async (
   dispatch: Dispatch<AnyAction>
 ) => {
   try {
-    const { data } = await axios.put(endpoint, request);
+    const { data } = await axios.patch(`${endpoint}/mileage`, request);
     return dispatch(updateMileage(data));
   } catch (e) {
     console.error(`Failed to update mileage : ${e}`);

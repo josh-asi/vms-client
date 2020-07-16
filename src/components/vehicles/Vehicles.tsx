@@ -13,6 +13,7 @@ import DeleteIcon from './icons/trash.svg';
 
 import './_vehicles.scss';
 import AddVehicleModal from './add-vehicle-modal/AddVehicleModal';
+import UpdateMileageModal from './update-mileage-modal/UpdateMileageModal';
 
 const Vehicles = () => {
   const dispatch = useDispatch();
@@ -32,13 +33,22 @@ const Vehicles = () => {
     setUpdateMileageModalVisible,
   ] = React.useState<boolean>(false);
   const [updateMileageModalId, setUpdateMileageModalId] = React.useState<
-    number | null
-  >(null);
+    number
+  >(-1);
+
+  const [mileage, setMileage] = React.useState<number>(-1);
 
   const closeAddVehicleModal = () => setAddModalVisible(false);
+  const closeUpdateMileageModal = () => {
+    setUpdateMileageModalId(-1);
+    setUpdateMileageModalVisible(false);
+    setMileage(-1);
+  };
 
   const deleteVehicle = (vehicleId: number) => {
-    if (window.confirm('Are you sure you want to delete this vehicle?')) {
+    if (
+      window.confirm(`Are you sure you want to delete vehicle ${vehicleId}?`)
+    ) {
       dispatch(deleteVehicleRequest(vehicleId));
     }
   };
@@ -67,6 +77,11 @@ const Vehicles = () => {
                   src={EditIcon}
                   alt='Edit Icon'
                   className='vehicles__action vehicles__action--edit'
+                  onClick={() => {
+                    setUpdateMileageModalId(vehicle.id);
+                    setUpdateMileageModalVisible(true);
+                    setMileage(vehicle.mileage);
+                  }}
                 />
                 <img
                   data-test={`delete-btn--${vehicle.id}`}
@@ -81,16 +96,24 @@ const Vehicles = () => {
         </tbody>
       </table>
       <div className='vehicles__add'>
-        <span
-          className='vehicles__add-button add-btn'
+        <button
+          className='vehicles__add-button btn add-btn'
           onClick={() => setAddModalVisible(true)}
         >
           Add Vehicle
-        </span>
+        </button>
       </div>
 
       {addModalVisible && (
         <AddVehicleModal closeAddVehicleModal={closeAddVehicleModal} />
+      )}
+
+      {updateMileageModalVisible && (
+        <UpdateMileageModal
+          closeUpdateMileageModal={closeUpdateMileageModal}
+          mileage={mileage}
+          vehicleId={updateMileageModalId}
+        />
       )}
     </div>
   );

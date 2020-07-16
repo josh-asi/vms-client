@@ -13,8 +13,8 @@ export interface NewVehicleRequest {
 }
 
 export interface UpdateMileageRequest {
-  id: number;
-  mileage: number;
+  vehicleId: number;
+  newMileage: number;
 }
 
 // Responses

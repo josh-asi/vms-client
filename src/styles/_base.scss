@@ -34,21 +34,35 @@ html {
   font-size: 2rem;
 }
 
-.add-btn {
+.btn {
   border: 2px solid $color-primary;
-  border-radius: 20px;
-  padding: 0.5rem 1rem;
-  width: 5rem;
   font-weight: 600;
   cursor: pointer;
   background-color: white;
 
   transition: all 0.2s ease;
 
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+
   &:hover {
     background-color: $color-primary;
     color: white;
   }
+}
+
+.add-btn {
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  width: 5rem;
+}
+
+.update-btn {
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  width: 8rem;
 }
 
 .close-btn {

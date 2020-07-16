@@ -110,7 +110,9 @@ const AddVehicleModal: React.FC<AddVehicleModalProps> = ({
         </div>
         <div className='add-vehicle__footer'>
           <button
-            className={Classnames('add-btn', { disabled: isButtonDisabled })}
+            className={Classnames('btn add-btn', {
+              disabled: isButtonDisabled,
+            })}
             onClick={addVehicleOnClick}
           >
             Add
