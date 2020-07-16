@@ -1,6 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getVehiclesRequest } from '../../redux/vehicles/requests';
+import {
+  getVehiclesRequest,
+  deleteVehicleRequest,
+} from '../../redux/vehicles/requests';
 import { getVehicleTypesRequest } from '../../redux/vehicle-types/requests';
 import { AppState } from '../../redux/store';
 import { Vehicle } from '../../redux/vehicles/types';
@@ -26,6 +29,12 @@ const Vehicles = () => {
   const [addModalVisible, setAddModalVisible] = React.useState<boolean>(false);
 
   const closeAddVehicleModal = () => setAddModalVisible(false);
+
+  const deleteVehicle = (vehicleId: number) => {
+    if (window.confirm('Are you sure you want to delete this vehicle?')) {
+      dispatch(deleteVehicleRequest(vehicleId));
+    }
+  };
 
   return (
     <div className='vehicles'>
@@ -53,9 +62,11 @@ const Vehicles = () => {
                   className='vehicles__action vehicles__action--edit'
                 />
                 <img
+                  data-test={`delete-btn--${vehicle.id}`}
                   src={DeleteIcon}
                   alt='Delete Icon'
                   className='vehicles__action vehicles__action--delete'
+                  onClick={() => deleteVehicle(vehicle.id)}
                 />
               </td>
             </tr>

@@ -2,11 +2,15 @@ import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 import { useDispatch, useSelector } from 'react-redux';
 import Vehicles from './Vehicles';
-import { getVehiclesRequest } from '../../redux/vehicles/requests';
+import {
+  getVehiclesRequest,
+  deleteVehicleRequest,
+} from '../../redux/vehicles/requests';
 import { getVehicleTypesRequest } from '../../redux/vehicle-types/requests';
 
 import { AppState } from '../../redux/store';
 import { vehicles } from '../../redux/vehicles/vehiclesInMemory';
+import { findByTestAttr } from '../../../test/testUtils';
 
 jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
@@ -15,6 +19,7 @@ jest.mock('react-redux', () => ({
 
 jest.mock('../../redux/vehicles/requests', () => ({
   getVehiclesRequest: jest.fn(),
+  deleteVehicleRequest: jest.fn(),
 }));
 
 jest.mock('../../redux/vehicle-types/requests', () => ({
@@ -54,6 +59,10 @@ const mockGetVehicleTypes = getVehicleTypesRequest as jest.Mock;
 const mockGetVehicleTypesRequest = jest.fn();
 mockGetVehicleTypes.mockImplementation(() => mockGetVehicleTypesRequest);
 
+const mockDeleteVehicle = deleteVehicleRequest as jest.Mock;
+const mockDeleteVehicleRequest = jest.fn();
+mockDeleteVehicle.mockImplementation(() => mockDeleteVehicleRequest);
+
 const setup = () => mount(<Vehicles />);
 
 describe('<Vehicles />', () => {
@@ -66,6 +75,8 @@ describe('<Vehicles />', () => {
 
     mockGetVehiclesRequest.mockClear();
     mockGetVehicleTypesRequest.mockClear();
+
+    mockDeleteVehicleRequest.mockClear();
     wrapper = setup();
   });
 
@@ -75,6 +86,14 @@ describe('<Vehicles />', () => {
     });
     it('should call getVehicleTypesRequest', () => {
       expect(mockDispatch).toHaveBeenCalledWith(mockGetVehicleTypesRequest);
+    });
+  });
+
+  describe('actions', () => {
+    it('should call deleteVehicleRequest', () => {
+      const deleteBtn = findByTestAttr(wrapper, 'delete-btn--1');
+      deleteBtn.simulate('click');
+      expect(mockDispatch).toHaveBeenCalledWith(mockDeleteVehicleRequest);
     });
   });
 });
