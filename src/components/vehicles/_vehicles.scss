@@ -1,0 +1,90 @@
+@import '../../styles/variables';
+// @import '../../styles/mixins';
+
+$border-color-1: #909090;
+$border-color-2: #c3c3c3;
+
+.vehicles {
+  &__table {
+    display: block;
+    height: 75vh;
+    width: 100%;
+    text-align: center;
+    overflow-y: hidden;
+    margin-bottom: 3rem;
+
+    & > * {
+      display: block;
+      width: 100%;
+    }
+
+    thead {
+      border-bottom: 1px solid $border-color-1;
+    }
+
+    tr {
+      display: block;
+      padding: 1rem;
+      width: 100%;
+    }
+
+    tbody {
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+
+  &__content {
+    tr {
+      border-bottom: 1px solid $border-color-2;
+    }
+
+    // @include hideScrollBar;
+  }
+
+  &__id {
+    width: 10rem;
+  }
+
+  &__type {
+    width: 30rem;
+  }
+
+  &__speed {
+    width: 45rem;
+  }
+
+  &__mileage {
+    width: 45rem;
+  }
+
+  &__actions {
+    width: 20rem;
+  }
+
+  &__action {
+    height: 1.6rem;
+    width: 1.6rem;
+    margin-right: 1rem;
+    cursor: pointer;
+
+    &--delete {
+      height: 1.4rem;
+      width: 1.4rem;
+    }
+  }
+
+  &__add {
+    display: block;
+    text-align: end;
+  }
+
+  &__add-button {
+    border: 2px solid $color-primary;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    width: 10rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
