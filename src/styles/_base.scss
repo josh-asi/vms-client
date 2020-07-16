@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+@import './variables';
 
 *,
 *::before,
@@ -33,6 +34,24 @@ html {
   font-size: 2rem;
 }
 
+.add-btn {
+  border: 2px solid $color-primary;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  width: 5rem;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: white;
+
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $color-primary;
+    color: white;
+  }
+}
+
 .close-btn {
   cursor: pointer;
+  font-size: 2rem;
 }

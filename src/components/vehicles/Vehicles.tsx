@@ -27,6 +27,13 @@ const Vehicles = () => {
   );
 
   const [addModalVisible, setAddModalVisible] = React.useState<boolean>(false);
+  const [
+    updateMileageModalVisible,
+    setUpdateMileageModalVisible,
+  ] = React.useState<boolean>(false);
+  const [updateMileageModalId, setUpdateMileageModalId] = React.useState<
+    number | null
+  >(null);
 
   const closeAddVehicleModal = () => setAddModalVisible(false);
 
@@ -75,7 +82,7 @@ const Vehicles = () => {
       </table>
       <div className='vehicles__add'>
         <span
-          className='vehicles__add-button'
+          className='vehicles__add-button add-btn'
           onClick={() => setAddModalVisible(true)}
         >
           Add Vehicle
