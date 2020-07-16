@@ -33,3 +33,7 @@
 ## Server
 
 Please make sure that the API server is running before the client server is run. The Github repository can be located [here](https://github.com/josh-asi/vms-web-api).
+
+## Known Limitations
+
+This will not work for Internet Explorer 11.
