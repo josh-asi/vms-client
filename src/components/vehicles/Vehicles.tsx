@@ -9,6 +9,7 @@ import EditIcon from './icons/edit.svg';
 import DeleteIcon from './icons/trash.svg';
 
 import './_vehicles.scss';
+import AddVehicleModal from './add-vehicle-modal/AddVehicleModal';
 
 const Vehicles = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,10 @@ const Vehicles = () => {
   const vehicles = useSelector<AppState, Vehicle[]>(
     (state) => state.vehicles.data
   );
+
+  const [addModalVisible, setAddModalVisible] = React.useState<boolean>(false);
+
+  const closeAddVehicleModal = () => setAddModalVisible(false);
 
   return (
     <div className='vehicles'>
@@ -58,8 +63,17 @@ const Vehicles = () => {
         </tbody>
       </table>
       <div className='vehicles__add'>
-        <span className='vehicles__add-button'>Add Vehicle</span>
+        <span
+          className='vehicles__add-button'
+          onClick={() => setAddModalVisible(true)}
+        >
+          Add Vehicle
+        </span>
       </div>
+
+      {addModalVisible && (
+        <AddVehicleModal closeAddVehicleModal={closeAddVehicleModal} />
+      )}
     </div>
   );
 };
